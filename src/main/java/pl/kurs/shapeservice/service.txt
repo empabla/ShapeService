@@ -1,0 +1,26 @@
+Stwórz serwis dla figur geometrycznych.
+Każda Figura może mieć policzone pole i obwód.
+Mamy 3 implementacje (Kwadrat(bok), Koło(promień), Prostokąt(dł, szer)).
+Stwórz Serwis dla Figur, w którym będziemy mieli możliwość:
+- znalezienia figury z największym polem (arg metody: lista figur),
+- znalezienie figury z największym obwodem *typu X (arg metody: lista figur i szukany typ),
+- export listy figur to JSON *void (argument to lista figur oraz ścieżka gdzie zapisac),
+- import listy figur z JSON, który zwraca List<Shape> (jako argument pobiera ścieżkę do pliku).
+Następnie napisz testy jednostkowe, gdzie trzeba użyj mockowania (o ile trzeba).
+Przygotuj też raport jacocco z pokryciem kodu testami.
+JSON z listą figur ma wyglądać np. tak:
+[{"type": "circle", "radius": 1.5}, {"type": "rectangle", "width": 15, "height": 20}]
+Uwaga:
+Figury mają być cache'owalne, a ich samoistne tworzenie powinno być zablokowane.
+Jedyny sposób stworzenia figury to przez metody fabryczne z jakiejś klasy ShapeFactory, która jednocześnie operuje
+na cache'u.
+Ma to wygladać np. tak:
+Square sq1 = shapeFactory.createSquare(10); // nie ma jeszcze kwadratu o boku 10, więc tworzy nową instancję
+Square sq2 = shapeFactory.createSquare(10); // jest już kwadrat o boku 10, więc sq2 powinno być tą samą referencją
+co sq1 (czyli sq1 == sq2) powinno dac true.
+
+Należy napisać testy jednostkowe shapeFactory i ich metod fabrycznych sprawdzając asercje interakcji z jakimś cachem,
+który ma w środku i sprawdzić czy on faktycznie działa.
+
+Możesz zrobić coś takiego, aby polecenie mvn clean install budowało paczkę JAR, którą będzie się dało od razu uruchomić
+(jakiś testowy main, w którym będzie np: Sysout(zaliczyłam test)).
